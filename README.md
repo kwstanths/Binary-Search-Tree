@@ -1,7 +1,7 @@
 # Binary-Search-Tree
 An implementation of a Binary Search Tree 
 
-#Build the library 
+# Build the library 
 mkdir build/release
 
 cd build/release
@@ -12,8 +12,8 @@ make
 
 sudo make install
 
-#Use the library
+# Use the library
 
-Add FindmyBST.cmake file to your CMake Module path,
+Add FindmyBST.cmake file to your CMake modules path,
 
 See bin/CMakeLists.txt to use in your CMake project

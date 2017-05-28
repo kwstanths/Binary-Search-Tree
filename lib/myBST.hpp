@@ -118,14 +118,26 @@ namespace bst {
             }
 
 	public:
+            /*
+                  Returns the value of the node
+                  @return The value of the node
+            */
 		T getValue() const{
 			return value;
 		}
 
+            /*
+                  Returns the left child of this node
+                  @return A pointer to the left child
+            */
             bst_node * getLeft() const{
                   return left;
             }
 
+            /*
+                  Returns the right child of this node
+                  @return A pointer to the right child
+            */
             bst_node * getRight() const{
                   return right;
             }
@@ -137,12 +149,16 @@ namespace bst {
             bst_node<T> * root;
 
       public:
-
-
             typedef BinarySearchTree_iterator<T> iterator;
 
+            /*
+                  Creates a tree with the root pointing to NULL
+            */
             BinarySearchTree(): root(NULL){};
 
+            /*
+                  Creates a tree with the root pointing to a starting node;
+            */
             BinarySearchTree(T _value){
 			std::cout << "test" << std::endl;
                   root = new bst_node<T>(_value, NULL, NULL);
@@ -152,12 +168,19 @@ namespace bst {
                   clear();
             }
 
+            /*
+                  Destroys the tree
+            */
             void clear(){
                   if (root == NULL) return;
                   delete root;
                   root = NULL;
             }
 
+            /*
+                  Inserts a new value to the tree
+                  @return True: Values is inserted, False: Value already exists
+            */
             bool insert(T _value){
                   if (root == NULL){
                         root = new bst_node<T>(_value, NULL, NULL);
@@ -166,12 +189,20 @@ namespace bst {
                   return root->insert(_value);
             }
 
+            /*
+                  Searches for a value
+                  @return True: Value exists, False: Value does not exist
+            */
             bool find(T _value) const{
                   if (root == NULL) return false;
 
                   return root->find(_value);
             }
 
+            /*
+                  Removes a value froma the tree
+                  @return True: Value removed, False: Value does not exist
+            */
             bool remove(T _value){
                   if (root == NULL) return false;
 
@@ -192,12 +223,20 @@ namespace bst {
                   }else return false;
             }
 
+            /*
+                  Returns the height of the tree
+                  @return The height of the tree
+            */
             int height() const{
                   if (root == NULL) return 0;
 
                   return root->height();
             }
 
+            /*
+                  Returns a pointer the min value
+                  @return A pointer to the node with the min value
+            */
             bst_node<T> * min() const{
                   if (root == NULL) return NULL;
 
@@ -206,6 +245,10 @@ namespace bst {
                   return root->min();
             }
 
+            /*
+                  Returns a pointer to the max value
+                  @return A pointer to the node with the max value
+            */
             bst_node<T> * max() const{
                   if (root == NULL) return NULL;
 
@@ -214,10 +257,19 @@ namespace bst {
                   return root->max();
             }
 
+            /*
+                  Returns a preorder iterator of the tree
+                  @return A preorder iterator
+            */
             iterator begin(){
                   return BinarySearchTree_iterator<T>(root, 1);
             }
 
+            /*
+                  Returns an iterator of the tree
+                  @param type The type of the iterator. Accepted values are "PREORDER", "INORDER", "POSTORDER"
+                  @return An iterator
+            */
             iterator begin(const std::string& type) {
                   if (type == "PREORDER") return BinarySearchTree_iterator<T>(root, 1);
                   if (type == "INORDER") return BinarySearchTree_iterator<T>(root, 2);
@@ -226,6 +278,10 @@ namespace bst {
                   return BinarySearchTree_iterator<T>(root, 1);
             }
 
+            /*
+                  Returns an ending iterator
+                  @return An ending iterator
+            */
             iterator end(){
                   return BinarySearchTree_iterator<T>(NULL, 0);
             }
@@ -237,14 +293,15 @@ namespace bst {
 	private:
             std::queue<bst_node<T> * > * nodequeue;
             bst_node<T> * pointed;
-		BinarySearchTree_iterator(bst_node<T> * _pointed, int type): pointed(_pointed){
-                  nodequeue = new std::queue<bst_node<T> *>();
 
-                  if (type == 1) preorder_traversal(_pointed);
-                  if (type == 2) inorder_traversal(_pointed);
-                  if (type == 3) postorder_traversal(_pointed);
+	BinarySearchTree_iterator(bst_node<T> * _pointed, int type): pointed(_pointed){
+		nodequeue = new std::queue<bst_node<T> *>();
 
-                  pointed = nodequeue->front();
+		if (type == 1) preorder_traversal(_pointed);
+		if (type == 2) inorder_traversal(_pointed);
+		if (type == 3) postorder_traversal(_pointed);
+
+		pointed = nodequeue->front();
             }
 
             void preorder_traversal(bst_node<T> * temproot){

@@ -13,3 +13,6 @@ file(GLOB ${NAME}_SOURCES *.cpp)
 include_directories(../lib/)
 
 add_executable(${NAME} ${${NAME}_HEADERS} ${${NAME}_SOURCES})
+
+target_link_libraries(${NAME} pthread)
+target_link_libraries(${NAME} ${myBST_LIBRARIES})

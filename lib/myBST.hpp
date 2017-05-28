@@ -7,7 +7,7 @@
 namespace mns{
 
 namespace bst {
-	//TODO custom function in case of type is a pointer
+	//TODO custom user defined function in case of type is a pointer
       template <typename T> class BinarySearchTree;
 
       template <typename T> class BinarySearchTree_iterator;
@@ -144,6 +144,7 @@ namespace bst {
             BinarySearchTree(): root(NULL){};
 
             BinarySearchTree(T _value){
+			std::cout << "test" << std::endl;
                   root = new bst_node<T>(_value, NULL, NULL);
             }
 
